@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Taoist Temple</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            /*  背景圖大小符合頁面75%寬度, 25%高度 */ 
+            background: url("pics/SlideshowWeiling01.png") center/75% auto no-repeat, darkred;
+            background-image: url("pics/SlideshowWeiling01.png");
+            background-size: 65% auto;
+            background-position:  center calc(25% - 250px);          
+            background-repeat: no-repeat;
+            
+        }
+        /* 選單位置向下移動 */
+        .form-group {
+            position: relative;
+            top: 250px;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 5px;
+            font-size: 2em;
+        }
+        .form-group select {
+            transform: scale(2);  /* Make the select element twice as large */
+        /* Other styles... */
+            margin: 3em;
+        }
+        .form-group option {
+            font-size: 20px;  /* Make the select element twice as large */
+        /* Other styles... */
+        } 
+        .fortune-button {
+            position: relative;
+            top: 300px;
+            display: block;
+            font-size: 25px;
+            padding: 10px 20px;
+            transition: transform 0.3s ease;
+            margin: 0 auto;
+            /* margin-top: 200px; */
+        }
+
+        .fortune-button:active {
+            transform: scale(0.9);
+            background-color: #3413c7;  /* Change the color when the button is clicked */
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 100px);  /* Create 9 columns */
+            grid-gap: 5px;  /* Add some space between the buttons */
+            position: relative;
+            top: 250px;
+            /* gap: 15px; */
+            justify-content: center;
+            width: 75%;
+            margin: 0 auto;
+        }
+
+        .grid-button {
+            padding: 10px 20px;
+            font-size: 25px;
+            transition: transform 0.3s ease;
+            width: 100px;
+        }
+        .grid-button:active {
+            background-color: #88108e;  /* Change the color when the button is clicked */
+        }   
+     </style>
+</head>
+<body>
+    <div class="form-group">
+        <label for="age">年齡：</label>
+        <select id="age" >
+            <option value="">請選擇</option>
+             <!-- JavaScript will insert the other options here -->
+        </select>
+
+        <script>
+            var select = document.getElementById('age');
+            for (var i = 0; i <= 120; i++) {
+                var option = document.createElement('option');
+                option.value = i;
+                option.text = i;
+                select.appendChild(option);
+            }
+        </script>
+    
+        <label for="gender">性別：</label>
+        <select id="gender">
+            <option value="">請選擇</option>
+            <option value="male">男性</option>
+            <option value="female">女性</option>
+            <option value="other">其他</option>
+        </select>
+
+        <label for="marital-status">婚姻：</label>
+        <select id="marital-status">
+            <option value="">請選擇</option>
+            <option value="married">已婚</option>
+            <option value="unmarried">未婚</option>
+        </select>        
+    </div>
+    <div class="button-grid">
+        <!-- Add 27 buttons -->
+        <button class="grid-button">討海</button>
+        <button class="grid-button">作塭</button>
+        <button class="grid-button">魚苗</button>
+        <button class="grid-button">求財</button>
+        <button class="grid-button">耕作</button>
+        <button class="grid-button">經商</button>
+        <button class="grid-button">月令</button>
+        <button class="grid-button">六甲</button>
+        <button class="grid-button">婚姻</button>
+        <button class="grid-button">家運</button>
+        <button class="grid-button">失物</button>
+        <button class="grid-button">尋人</button>
+        <button class="grid-button">遠信</button>
+        <button class="grid-button">六畜</button>
+        <button class="grid-button">築室</button>
+        <button class="grid-button">移居</button>
+        <button class="grid-button">墳墓</button>
+        <button class="grid-button">出外</button>
+        <button class="grid-button">行舟</button>
+        <button class="grid-button">凡事</button>
+        <button class="grid-button">治病</button>
+        <button class="grid-button">作事</button>
+        <button class="grid-button">功名</button>
+        <button class="grid-button">官事</button>
+        <button class="grid-button">家事</button>
+        <button class="grid-button">求兒</button>
+        <button class="grid-button">心想</button>
+        <script>
+            // Get all buttons with the class 'grid-button'
+            var buttons = document.querySelectorAll('.grid-button');
+
+            // Add a click event listener to each button
+            buttons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // Change the background color of the clicked button
+                    this.style.backgroundColor = '#c71313';
+                 });
+            });
+        </script>
+    </div>
+
+    <button class="fortune-button">求籤</button>
+        <script>
+            // Get all buttons with the class 'grid-button'
+            var buttons = document.querySelectorAll('.fortune-button');
+
+            // Add a click event listener to each button
+            buttons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // Change the background color of the clicked button
+                    this.style.backgroundColor = "#3413c7";
+                });
+            });
+           
+        </script> 
+        <script> ; </script>
+</body>
+</html>
