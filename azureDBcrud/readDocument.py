@@ -24,5 +24,5 @@ for name in df.裝置.sort_values().unique():
     ax[n].legend(loc="upper right")
     n+=1
 
-    plt.suptitle("Sensor temperature")
-    plt.show()
+plt.suptitle("Sensor temperature")
+plt.show()
