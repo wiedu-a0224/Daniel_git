@@ -16,7 +16,7 @@
         /* 選單位置向下移動 */
         .form-group {
             position: relative;
-            top: 250px;
+            top: 180px;
             display: flex;
             justify-content: center;
             flex-direction: row;
@@ -28,7 +28,7 @@
         .form-group select {
             transform: scale(2);  /* Make the select element twice as large */
         /* Other styles... */
-            margin: 3em;
+            margin: 2em;
         }
         .form-group option {
             font-size: 20px;  /* Make the select element twice as large */
@@ -36,13 +36,14 @@
         } 
         .fortune-button {
             position: relative;
-            top: 300px;
+            top: 230px;
             display: block;
             font-size: 25px;
             padding: 10px 20px;
             transition: transform 0.3s ease;
             margin: 0 auto;
             /* margin-top: 200px; */
+            background-color: #7b67ff;
         }
 
         .fortune-button:active {
@@ -55,7 +56,7 @@
             grid-template-columns: repeat(9, 100px);  /* Create 9 columns */
             grid-gap: 5px;  /* Add some space between the buttons */
             position: relative;
-            top: 250px;
+            top: 200px;
             /* gap: 15px; */
             justify-content: center;
             width: 75%;
@@ -67,9 +68,10 @@
             font-size: 25px;
             transition: transform 0.3s ease;
             width: 100px;
+            background-color: #f07070;
         }
         .grid-button:active {
-            background-color: #88108e;  /* Change the color when the button is clicked */
+            background-color: #8e1010;  /* Change the color when the button is clicked */
         }   
      </style>
 </head>
@@ -142,6 +144,10 @@
             // Add a click event listener to each button
             buttons.forEach(function(button) {
                 button.addEventListener('click', function() {
+                    // 將所有按鈕的背景色重置為原始顏色
+                    buttons.forEach(function(otherButton) {
+                        otherButton.style.backgroundColor = '#8e8610';
+                    });
                     // Change the background color of the clicked button
                     this.style.backgroundColor = '#c71313';
                  });
@@ -163,6 +169,6 @@
             });
            
         </script> 
-        <script> ; </script>
+        
 </body>
 </html>
