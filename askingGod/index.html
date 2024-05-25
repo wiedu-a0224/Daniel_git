@@ -2,85 +2,123 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-    <title>Taoist Temple</title>
+    <title>廟公機器人</title>
     <meta charset="UTF-8">
     
     <style>
         body {
-            /*  背景圖大小符合頁面75%寬度, 25%高度 */ 
-            background: url("pics/SlideshowWeiling01.png") center/75% auto no-repeat, darkred;
-            background-image: url("pics/SlideshowWeiling01.png");
-            background-size: 65% auto;
-            background-position:  center calc(25% - 250px);          
+             
+            background: darkred;
             background-repeat: no-repeat;
             
+            
+        }
+        /* imagin */
+        .image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0px; /* Adjust as needed */
+        }
+        .image img {
+            width: auto;
+            height: auto;
+            object-fit: contain;
         }
         /* 選單位置向下移動 */
         .form-group {
             position: relative;
-            top: 180px;
+            margin-top: 1vh;
             display: flex;
             justify-content: center;
             flex-direction: row;
             flex-wrap: wrap;
             align-items: center;
             gap: 5px;
-            font-size: 2em;
+            font-size: 1.2rem;
         }
         .form-group select {
-            transform: scale(2);  /* Make the select element twice as large */
+            transform: scale(1.5);  /* Make the select element twice as large */
         /* Other styles... */
             margin: 2em;
         }
         .form-group option {
-            font-size: 20px;  /* Make the select element twice as large */
+            font-size: 2rem;  /* Make the select element twice as large */
         /* Other styles... */
         } 
-        .fortune-button {
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));  /* Create 9 columns */
+            grid-gap: 5px;  /* Add some space between the buttons */
             position: relative;
-            top: 230px;
-            display: block;
-            font-size: 25px;
+            margin-top: 10vh;
+            justify-content: center;
+            width: 70%;
+            margin: auto;
+        }
+        @media (min-width: 1080Px) {
+            .grid-button {
+                grid-template-columns: repeat(9, 1fr);  /* Create smaller columns */
+            }
+        }
+        @media (max-width: 600Px) {
+            .grid-button {
+                grid-template-columns: repeat(3, 1fr);  /* Create smaller columns */
+            }
+        }
+        .grid-button {
             padding: 10px 20px;
+            font-size: 25px;
+            font-weight: bold;
             transition: transform 0.3s ease;
-            margin: 0 auto;
-            /* margin-top: 200px; */
+            width: 120px;
+            background-color: #f07070;
+        }
+       
+        .grid-button:active {
+            transform: scale(0.9);
+            background-color: #8e1010;  /* Change the color when the button is clicked */
+        }
+        #selected-values {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5vh;
+            width: 1080px;
+            font-size: 25px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 5vh;
+        }
+        .fortune-button {
+            font-size: 30px;
+            font-weight: bold;
+            padding: 10px 30px;
+            transition: transform 0.3s ease;
             background-color: #7b67ff;
+            width: 200px; 
         }
 
         .fortune-button:active {
             transform: scale(0.9);
             background-color: #3413c7;  /* Change the color when the button is clicked */
-        }
-
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(9, 100px);  /* Create 9 columns */
-            grid-gap: 5px;  /* Add some space between the buttons */
-            position: relative;
-            top: 200px;
-            /* gap: 15px; */
-            justify-content: center;
-            width: 75%;
-            margin: 0 auto;
-        }
-
-        .grid-button {
-            padding: 10px 20px;
-            font-size: 25px;
-            transition: transform 0.3s ease;
-            width: 100px;
-            background-color: #f07070;
-        }
-        .grid-button:active {
-            transform: scale(0.9);
-            background-color: #8e1010;  /* Change the color when the button is clicked */
-        }   
+        } 
+        label {
+            font-size: 30px; /* Adjust as needed */
+            font-weight: bold;
+        }  
      </style>
 </head>
 <body>
+    <div class="image">
+        <img src="pics/Weiling03.png" alt="Weiling03" >
+    </div>
     <div class="form-group">
-        <label for="age">年齡：</label>
+        <label for="age" >年齡：</label>
         <select id="age" >
             <option value="">請選擇</option>
              <!-- JavaScript will insert the other options here -->
@@ -96,19 +134,20 @@
             }
         </script>
     
-        <label for="gender">性別：</label>
+        <label for="gender" >性別：</label>
         <select id="gender">
             <option value="">請選擇</option>
-            <option value="male">男性</option>
-            <option value="female">女性</option>
-            <option value="other">其他</option>
+            <option value="男性">男性</option>
+            <option value="女性">女性</option>
+            <option value="其他">其他</option>
         </select>
 
         <label for="marital-status">婚姻：</label>
         <select id="marital-status">
             <option value="">請選擇</option>
-            <option value="married">已婚</option>
-            <option value="unmarried">未婚</option>
+            <option value="未婚">未婚</option>
+            <option value="已婚">已婚</option>
+            <option value="伴侶">伴侶</option>
         </select>        
     </div>
     <div class="button-grid">
@@ -156,20 +195,76 @@
                  });
             });
         </script>
-    </div>
+    <div id="selected-values"></div>
+    
+    <script>
+        // Initialize an array to store the selected values
+        var selectedValues = [];
 
-    <button class="fortune-button">求籤</button>
-        <script>
-            // Get all buttons with the class 'grid-button'
-            var fortuneButton = document.querySelector('.fortune-button');
+        // Get the select elements
+        var ageSelect = document.getElementById('age');
+        var genderSelect = document.getElementById('gender');
+        var maritalStatusSelect = document.getElementById('marital-status');
 
-            // Add a click event listener to each button
-            fortuneButton.addEventListener('click', function() {
+        // Get the div element
+        var selectedValuesDiv = document.getElementById('selected-values');
+
+        // Add an event listener to each select element
+        ageSelect.addEventListener('change', function() {
+            selectedValues[0] = this.value;
+            selectedValuesDiv.textContent = selectedValues.join(', ');
+        });
+        genderSelect.addEventListener('change', function() {
+            selectedValues[1] = this.value;
+            selectedValuesDiv.textContent = selectedValues.join(', ');
+        });
+        maritalStatusSelect.addEventListener('change', function() {
+            selectedValues[2] = this.value;
+            selectedValuesDiv.textContent = selectedValues.join(', ');
+        });
+
+        // Get all buttons with the class 'grid-button'
+        var buttons = document.querySelectorAll('.grid-button');
+
+        // Add a click event listener to each button
+        buttons.forEach(function(button, index) {
+            button.addEventListener('click', function() {
+                // Reset the background color of all buttons
+                buttons.forEach(function(otherButton) {
+                    otherButton.style.backgroundColor = '#f07070';
+                });
                 // Change the background color of the clicked button
-                this.style.backgroundColor = "#3413c7";               
+                this.style.backgroundColor = '#c71313';
+                // Store the text of the clicked button in the array
+                selectedValues[3] = this.textContent;
+                selectedValuesDiv.textContent = selectedValues.join(', ');
             });
-           
-        </script> 
+        });
         
+    </script>
+    </div>
+    <div class="button-container">
+        <button class="fortune-button">求籤</button>
+            <script>
+                // Get all buttons with the class 'grid-button'
+                var fortuneButton = document.querySelector('.fortune-button');
+
+                // Add a click event listener to each button
+                fortuneButton.addEventListener('click', function() {
+                    // Change the background color of the clicked button
+                    this.style.backgroundColor = "#3413c7"; 
+                    //隨機從1~60產生一個數字
+                    var random = Math.floor(Math.random() * 60) + 1;
+                    //在fortune-button下方顯示random
+                    this.textContent = random;
+                    //顯示檔案名稱"pics/stickpic/"+str(random)+".png"
+                    var img = document.createElement("img");
+                    img.src = "pics/stickpic/"+random+".png";
+                    document.body.appendChild(img);
+                    
+                });
+            
+            </script> 
+    </div>      
 </body>
 </html>
