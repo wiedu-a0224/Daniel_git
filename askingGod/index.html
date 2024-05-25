@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <title>Taoist Temple</title>
     <meta charset="UTF-8">
+    
     <style>
         body {
             /*  背景圖大小符合頁面75%寬度, 25%高度 */ 
@@ -71,6 +73,7 @@
             background-color: #f07070;
         }
         .grid-button:active {
+            transform: scale(0.9);
             background-color: #8e1010;  /* Change the color when the button is clicked */
         }   
      </style>
@@ -146,7 +149,7 @@
                 button.addEventListener('click', function() {
                     // 將所有按鈕的背景色重置為原始顏色
                     buttons.forEach(function(otherButton) {
-                        otherButton.style.backgroundColor = '#8e8610';
+                        otherButton.style.backgroundColor = '#f07070';
                     });
                     // Change the background color of the clicked button
                     this.style.backgroundColor = '#c71313';
@@ -158,14 +161,12 @@
     <button class="fortune-button">求籤</button>
         <script>
             // Get all buttons with the class 'grid-button'
-            var buttons = document.querySelectorAll('.fortune-button');
+            var fortuneButton = document.querySelector('.fortune-button');
 
             // Add a click event listener to each button
-            buttons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    // Change the background color of the clicked button
-                    this.style.backgroundColor = "#3413c7";
-                });
+            fortuneButton.addEventListener('click', function() {
+                // Change the background color of the clicked button
+                this.style.backgroundColor = "#3413c7";               
             });
            
         </script> 
