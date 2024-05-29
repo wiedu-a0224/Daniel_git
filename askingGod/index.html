@@ -262,10 +262,32 @@
                     var img = document.createElement("img");
                     img.src = "pics/stickpic/"+random+".png";
                     document.body.appendChild(img);
-                    
                 });
             
-            </script> 
+                var subscriptionKey = '0a51c4ceb991492e9318317eb0ab4ba5';
+                var endpoint = 'https://daniellee-computer-vision-0424.cognitiveservices.azure.com/';
+
+                var uriBase = endpoint + 'vision/v3.0/ocr';
+
+                var params = {
+                    'language': 'unk',
+                    'detectOrientation': 'true',
+                };
+
+                var img = document.querySelector('img');
+
+                fetch(uriBase + '?' + new URLSearchParams(params), {
+                    method: 'POST',
+                    body: img,
+                    headers: {
+                        'Content-Type': 'application/octet-stream',
+                        'Ocp-Apim-Subscription-Key': subscriptionKey
+                    }
+                })
+                .then(response => response.json())
+                .then(data => console.log(JSON.stringify(data, null, 2)))
+                .catch(error => console.error(error));
+            </script>
     </div>      
 </body>
 </html>
