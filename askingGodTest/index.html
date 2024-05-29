@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>廟公機器人</title>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <style>
+        body {
+            background: darkred;
+            background-repeat: no-repeat;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .form-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            margin-top: 2vh;
+        }
+        .form-group select {
+            transform: scale(1.2);
+            margin: 0 1em;
+        }
+        .form-group option {
+            font-size: 1.5rem;
+        }
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            grid-gap: 10px;
+            justify-content: center;
+            margin: 20px auto;
+            width: 85%;
+        }
+        .grid-button {
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            width: 100%;
+            background-color: #f07070;
+            border: none;
+            cursor: pointer;
+        }
+        .grid-button:active {
+            transform: scale(0.9);
+            background-color: #8e1010;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 5vh;
+        }
+        .fortune-button {
+            font-size: 30px;
+            font-weight: bold;
+            padding: 10px 30px;
+            transition: transform 0.3s ease;
+            background-color: #7b67ff;
+            border: none;
+            cursor: pointer;
+        }
+        .fortune-button:active {
+            transform: scale(0.9);
+            background-color: #3413c7;
+        }
+        label {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        #selected-values {
+            text-align: center;
+            margin-top: 5vh;
+            font-size: 1.5rem;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: none;
+        }
+        #overlay img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div class="image">
+        <img src="pics/Weiling03.png" alt="Weiling Image">
+    </div>
+    <div class="form-group">
+        <label for="age">年齡：</label>
+        <select id="age">
+            <option value="">請選擇</option>
+            <!-- Options will be added by JavaScript -->
+        </select>
+
+        <label for="gender">性別：</label>
+        <select id="gender">
+            <option value="">請選擇</option>
+            <option value="男性">男性</option>
+            <option value="女性">女性</option>
+            <option value="其他">其他</option>
+        </select>
+
+        <label for="marital-status">婚姻：</label>
+        <select id="marital-status">
+            <option value="">請選擇</option>
+            <option value="未婚">未婚</option>
+            <option value="已婚">已婚</option>
+            <option value="伴侶">伴侶</option>
+        </select>
+    </div>
+    <div class="button-grid">
+        <button class="grid-button">討海</button>
+        <button class="grid-button">作塭</button>
+        <button class="grid-button">魚苗</button>
+        <button class="grid-button">求財</button>
+        <button class="grid-button">耕作</button>
+        <button class="grid-button">經商</button>
+        <button class="grid-button">月令</button>
+        <button class="grid-button">六甲</button>
+        <button class="grid-button">婚姻</button>
+        <button class="grid-button">家運</button>
+        <button class="grid-button">失物</button>
+        <button class="grid-button">尋人</button>
+        <button class="grid-button">遠信</button>
+        <button class="grid-button">六畜</button>
+        <button class="grid-button">築室</button>
+        <button class="grid-button">移居</button>
+        <button class="grid-button">墳墓</button>
+        <button class="grid-button">出外</button>
+        <button class="grid-button">行舟</button>
+        <button class="grid-button">凡事</button>
+        <button class="grid-button">治病</button>
+        <button class="grid-button">作事</button>
+        <button class="grid-button">功名</button>
+        <button class="grid-button">官事</button>
+        <button class="grid-button">家事</button>
+        <button class="grid-button">求兒</button>
+        <button class="grid-button">心想</button>
+    </div>
+    <div id="selected-values"></div>
+    <div class="button-container">
+        <button class="fortune-button">求籤</button>
+    </div>
+    <div id="overlay">
+        <img id="fortune-image" src="" alt="Fortune Stick">
+    </div>
+    <p id="output"></p>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ageSelect = document.getElementById('age');
+            for (let i = 0; i <= 120; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                ageSelect.appendChild(option);
+            }
+
+            const selectedValues = [];
+            const selectedValuesDiv = document.getElementById('selected-values');
+
+            const updateSelectedValues = () => {
+                selectedValuesDiv.textContent = selectedValues.join(', ');
+            };
+
+            const ageSelectHandler = () => {
+                selectedValues[0] = ageSelect.value;
+                updateSelectedValues();
+            };
+
+            const genderSelectHandler = () => {
+                selectedValues[1] = document.getElementById('gender').value;
+                updateSelectedValues();
+            };
+
+            const maritalStatusSelectHandler = () => {
+                selectedValues[2] = document.getElementById('marital-status').value;
+                updateSelectedValues();
+            };
+
+            ageSelect.addEventListener('change', ageSelectHandler);
+            document.getElementById('gender').addEventListener('change', genderSelectHandler);
+            document.getElementById('marital-status').addEventListener('change', maritalStatusSelectHandler);
+
+            const buttons = document.querySelectorAll('.grid-button');
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', function() {
+                    buttons.forEach(btn => btn.style.backgroundColor = '#f07070');
+                    this.style.backgroundColor = '#c71313';
+                    selectedValues[3] = this.textContent;
+                    updateSelectedValues();
+                });
+            });
+
+            const fortuneButton = document.querySelector('.fortune-button');
+            fortuneButton.addEventListener('click', function() {
+                const random = Math.floor(Math.random() * 60) + 1;
+                fortuneButton.textContent = random;
+                const img = document.getElementById('fortune-image');
+                img.src = `pics/stickpic/${random}.png`;
+                img.alt = `Fortune Stick ${random}`;
+                document.getElementById('overlay').style.display = 'flex';
+            });
+            
+            async function getJsonValue() {
+                console.log('getJsonValue was called');  // 添加這行來輸出日誌
+                // 使用 fetch API 來讀取 JSON 檔案
+                const response = await fetch('testJson.json');
+                const data = await response.json();
+            
+                // 假設我們要取得第一個元素的值
+                const value = dat[0].value;  // 假設每一筆資料都有一個 'value' 屬性
+            
+                document.getElementById('myInput').value = value;  // 將值設定為網頁的內容
+            }
+            
+            document.getElementById('overlay').addEventListener('click', function() {
+                this.style.display = 'none';
+               
+            });
+            // 點及最上層的圖片後後會執行main.js的function
+            document.querySelector('#overlay img').addEventListener('click', function() {
+                // window.open('http://avention.com.tw', '_self'); 
+                getJsonValue();  // 呼叫函數
+                const userInput = prompt(fortuneButton.textContent + '號籤，解籤內容：');
+            });           
+        });
+    </script>
+</body>
+</html>
