@@ -168,7 +168,7 @@
     <div id="overlay">
         <img id="fortune-image" src="" alt="Fortune Stick">
     </div>
-    <div id="output"></div>
+    <p id="output"></p>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const ageSelect = document.getElementById('age');
@@ -217,42 +217,34 @@
 
             const fortuneButton = document.querySelector('.fortune-button');
             fortuneButton.addEventListener('click', function() {
-                const random = Math.floor(Math.random() * 5) + 1;
+                const random = Math.floor(Math.random() * 60) + 1;
                 fortuneButton.textContent = random;
                 const img = document.getElementById('fortune-image');
-                img.src = `pics/stickpic5/${random}.png`;
+                img.src = `pics/stickpic/${random}.png`;
                 img.alt = `Fortune Stick ${random}`;
                 document.getElementById('overlay').style.display = 'flex';
             });
-
-    
-
-    
-        // Load the JSON file
-        fetch('stickPoetry.json')
-            .then(response => response.json())
-            .then(data => {
-                // Get a random key from the JSON data
-                // const randomIndex = Math.floor(Math.random() * data.length);
-                const randomData = data[fortuneButton.textContent];
-
-                // Print the corresponding value 
-                const values_1 = randomData['stick_poetry'];
-                const values_2 = randomData['stick_9'];
-
-                // Display the values in the HTML
-                document.getElementById('output').innerHTML = `stick_poetry: ${values_1}<br>stick_9: ${values_2}`;
-            })
-            .catch(error => console.error('Error:', error));
-    
-           
-
+            
+            async function getJsonValue() {
+                console.log('getJsonValue was called');  // 添加這行來輸出日誌
+                // 使用 fetch API 來讀取 JSON 檔案
+                const response = await fetch('testJson.json');
+                const data = await response.json();
+            
+                // 假設我們要取得第一個元素的值
+                const value = dat[0].value;  // 假設每一筆資料都有一個 'value' 屬性
+            
+                document.getElementById('myInput').value = value;  // 將值設定為網頁的內容
+            }
+            
             document.getElementById('overlay').addEventListener('click', function() {
                 this.style.display = 'none';
+               
             });
             // 點及最上層的圖片後後會執行main.js的function
             document.querySelector('#overlay img').addEventListener('click', function() {
-                // window.open('http://avention.com.tw', '_self');
+                // window.open('http://avention.com.tw', '_self'); 
+                getJsonValue();  // 呼叫函數
                 const userInput = prompt(fortuneButton.textContent + '號籤，解籤內容：');
             });           
         });
