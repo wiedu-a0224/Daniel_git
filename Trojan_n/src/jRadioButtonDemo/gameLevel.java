@@ -18,14 +18,14 @@ public class gameLevel {
 	add(panSpeed);
 	panSpeed.setBounds(20, 20, 80, 120);
 	Border lineB = BorderFactory.createLineBorder(Color.black);
-	panSpeed.setBorder(BorderFactory.createTitledBorder(lineB, "µ¥¯Å"));
+	panSpeed.setBorder(BorderFactory.createTitledBorder(lineB, "ï¿½ï¿½ï¿½ï¿½"));
 	panSpeed.setLayout(new FlowLayout(FlowLayout.LEFT));
 	ButtonGroup group = new ButtonGroup();
 	JRadioButton[] rdb = new JRadioButton[2];
-	rdb[0] = new JRadioButton("¼Ð·Ç", true);
-	rdb[1] = new JRadioButton("§Ö");
-	rdb[0] = new JRadioButton("«Ü§Ö", true);
-	rdb[1] = new JRadioButton("°ª¤â");
+	rdb[0] = new JRadioButton("ï¿½Ð·ï¿½", true);
+	rdb[1] = new JRadioButton("ï¿½ï¿½");
+	rdb[0] = new JRadioButton("ï¿½Ü§ï¿½", true);
+	rdb[1] = new JRadioButton("ï¿½ï¿½ï¿½ï¿½");
 	for (int i = 0; i < rdb.length; i++) {
 		group.add(rdb[i]);
 		panSpeed.add(rdb[i]);
@@ -57,27 +57,4 @@ public class gameLevel {
 		}
 	});
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
