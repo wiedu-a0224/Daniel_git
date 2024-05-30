@@ -2,7 +2,16 @@ from fastapi import FastAPI
 from langchain_openai import AzureChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 # 初始化 Azure OpenAI 聊天模型
 model = AzureChatOpenAI(
     api_key='8d60aa67aa574b71a9e9abf72927af37',
@@ -13,8 +22,12 @@ model = AzureChatOpenAI(
 )
 
 
+class Query(BaseModel):
+    query: str
+
+
 @app.post("/chain")
-def read_root(query: str):
+def read_root(query: Query):
     prompt = ChatPromptTemplate.from_template("""
     你是個非常厲害的算命先生，你叫陳玉樓人稱陳大師。
     以下是你的個人設定:

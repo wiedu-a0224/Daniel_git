@@ -2,11 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 // Load the JSON file
-const filePath = path.join('D:', 'Github', 'Daniel_git', 'askingGodTest', 'stickPoetry.json');
+const filePath = path.join('E:', 'Daniel_git', 'askingGodTest', 'stickPoetry.json');
 const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
 // Get a random key from the JSON data
-const randomIndex = Math.floor(Math.random() * data.length);
+// const randomIndex = Math.floor(Math.random() * data.length);
 const randomData = data[randomIndex];
 
 // Print the corresponding value 
