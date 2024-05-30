@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const randomIndex = Math.floor(Math.random() * 5) + 1; // Correctly generate a random index from 1 to 5
         fortuneButton.textContent = randomIndex;
         const img = document.getElementById('fortune-image');
-        img.src = `pics/stickpic5/${randomIndex}.png`;
+        img.src = `pics/stickpic/${randomIndex}.png`;
         img.alt = `Fortune Stick ${randomIndex}`;
         document.getElementById('overlay').style.display = 'flex';
    
@@ -79,7 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.querySelector('#overlay img').addEventListener('click', function() {
-        const query = values_1;
+        const query = selectedValues + values_1 + values_2;
+
         console.log('Sending query:', query); // Log the query being sent
       
         fetch("http://localhost:8000/chain", {
