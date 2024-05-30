@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const ageSelectHandler = () => {
-        selectedValues[0] = ageSelect.value;
+        selectedValues[0] = ageSelect.value+"歲";
         updateSelectedValues();
     };
 
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const fortuneButton = document.querySelector('.fortune-button');
     
     fortuneButton.addEventListener('click', function() {
-        const randomIndex = Math.floor(Math.random() * 5) + 1; // Correctly generate a random index from 1 to 5
+        const randomIndex = Math.floor(Math.random() * 60) + 1; // Correctly generate a random index from 1 to 60
         fortuneButton.textContent = randomIndex;
         const img = document.getElementById('fortune-image');
         img.src = `pics/stickpic/${randomIndex}.png`;
@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Sending query:', query); // Log the query being sent
       
         fetch("http://localhost:8000/chain", {
+        // fetch("http://metaproot.com:8000/chain", {    
           method: "POST",
           headers: {
             "Content-Type": "application/json",
