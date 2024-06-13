@@ -1,6 +1,10 @@
 import pandas as pd
 from pymongo import MongoClient
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+
+fontpath="Fonts/SourceHanSansCN-Regular.otf"
+prop=fm.FontProperties(fname=fontpath)
 
 Client=MongoClient("mongodb://localhost:27017/")
 db=Client.IoTDatabase
@@ -12,8 +16,8 @@ Client.close()
 #print(df.裝置.value_counts())
 
 fig, ax=plt.subplots( nrows=5, ncols=1, sharex=True,sharey=True,figsize=(8,8))
-fig.text(0.5, 0.04, "DateTime", ha="center")
-fig.text(0.04, 0.5, "Temperature", va="center",rotation="vertical")
+fig.text(0.5, 0.04, "日期時間", ha="center", fontproperties=prop)
+fig.text(0.04, 0.5, "溫度", va="center",rotation="vertical", fontproperties=prop)
 n=0
 colors=['r', 'b', 'y', 'g', 'c']
 for name in df.裝置.sort_values().unique():
@@ -24,5 +28,5 @@ for name in df.裝置.sort_values().unique():
     ax[n].legend(loc="upper right")
     n+=1
 
-plt.suptitle("Sensor temperature")
+plt.suptitle("感測器溫度", fontproperties=prop)
 plt.show()

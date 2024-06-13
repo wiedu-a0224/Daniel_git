@@ -1,0 +1,1 @@
+mongoimport.exe --host mycosmosdbru.mongo.cosmos.azure.com:10255 -u mycosmosdbru -p cDgNwDUu7gVRYDMHVvw3zzgGth9qdgsDcbZWBGobue6VoW0L9n666fxFvA0PvUBOztRk1DrGsMgfACDbdUsHNQ== --ssl --tlsInsecure --db IoTDatabase --collection IoTCollection --writeConcern {w:0} --type json --file DeviceTemperature.json --jsonArray

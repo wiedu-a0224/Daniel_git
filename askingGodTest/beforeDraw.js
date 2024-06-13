@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             buttons.forEach(btn => btn.style.backgroundColor = '#f07070');
             this.style.backgroundColor = '#c71313';
-            selectedValues[3] = this.textContent;
+            selectedValues[3] = "問"+this.textContent;
             updateSelectedValues();
         });
     });
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.querySelector('#overlay img').addEventListener('click', function() {
-        const query = selectedValues + values_1 + values_2;
+        const query = selectedValues + "請解籤詩:"+values_1 + values_2;
 
         console.log('Sending query:', query); // Log the query being sent
       
