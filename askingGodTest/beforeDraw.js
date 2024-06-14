@@ -1,6 +1,7 @@
 let values_1;
 let values_2;
 
+// age選擇，從0歲到120歲，每歲一個選項，預設為0歲，並將選擇的值放入selectedValues陣列中
 document.addEventListener('DOMContentLoaded', function() {
     const ageSelect = document.getElementById('age');
     for (let i = 0; i <= 120; i++) {
