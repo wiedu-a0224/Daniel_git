@@ -1,5 +1,9 @@
-#myGraph{
+#myGraph1, #myGraph2, #myGraph3 {
     width: 800px;
     height: 800px;
     border: 1px solid #ccc;
+}
+#row{
+    display: flex;
+    justify-content: center;
 }
